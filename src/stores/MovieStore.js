@@ -5,6 +5,11 @@ import { useLocalStorage } from '@vueuse/core';
 export const useMovieStore = defineStore('MovieStore', () => {
   const movies = ref([]);
   const user = ref('');
+  const userRating = useLocalStorage('movie-rating', {
+    username: '',
+    rating: 0,
+    movieId: '',
+  });
 
   async function getMovies(title) {
     const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
@@ -33,18 +38,5 @@ export const useMovieStore = defineStore('MovieStore', () => {
     });
   }
 
-  // async function login(email, password) {
-  //   try {
-  //     user = await fetch('http://localhost:5713/login', {
-  //       method: 'POST',
-  //       body: { email, password },
-  //     });
-
-  //     useLocalStorage('user', JSON.stringify(user));
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-  return { movies, getMovies, getFilteredMovies, getSortedMovies };
+  return { movies, getMovies, getFilteredMovies, getSortedMovies, userRating };
 });

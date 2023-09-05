@@ -56,7 +56,7 @@ function goBack(){
                     </div>
                    </li>
                    <p>User Rating:</p>
-                    <button @click="showModal = true">Open Modal</button>
+                    <button @click="showModal = true">Rate Movie</button>
 
                     <Teleport to="body">
                         <rating-modal :show="showModal"  @close="showModal = false" class="modal"></rating-modal>
@@ -115,7 +115,8 @@ button {
   width: 300px;
   margin-left: -100px;
   padding: 2.5em;
-  background-color: #F6F5F3;
+  background-color: #FAFAFA;
   color: #136090;
+  font-weight: bold;
 }
 </style>
