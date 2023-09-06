@@ -14,34 +14,38 @@ const value = ref(null);
 const username = ref('');
 const movieStore = useMovieStore()
 const rated = ref(false)
-
+console.log(props.id)
 const handleSubmit = () => {
-    movieStore.userRating.movieId = props.id
-    movieStore.userRating.username = username.value
-    movieStore.userRating.rating = value.value
+   if (movieStore.userRating
+        .map(userRating => userRating.username)
+        .includes(username.value)
+        ){
+          rated.value = true
+        }
+  else {
+    movieStore.userRating.unshift({username: username.value, rating: value.value, movieId: props.id})
+    console.log(movieStore.userRating)
+  }
 }
 
 </script>
 <template>
-   <Transition name="slide-fade">
-   <div v-if="show" class="movie-rating">
-      <div v-if="movieStore.userRating.rating">
-        Username: {{ movieStore.userRating.username }}
-        <Rating v-model="movieStore.userRating.rating" readonly :cancel="false"/>
-        MovieId: {{ movieStore.userRating.movieId }}
+  <div v-show="rated">
+    <div v-for="userRating in movieStore.userRating" :key="userRating.movieId">
+      <div v-if="userRating.movieId === props.id">
+        username: {{ userRating.username }}
+        <Rating v-model="userRating.rating" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
       </div>
-      <div v-else>
-        <p>Rate This Movie!</p> 
-        <form action="#" @submit.prevent="handleSubmit">
-            <input type="text" name="username" id="username" v-model="username" placeholder="Enter username">
-            <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
-            <button>Rate Movie</button>
-        </form>  
-      </div>
-                         
-    <button @click="$emit('close')">Close</button> 
+    </div>
   </div>
-  </Transition>
+  <div v-show="!rated">
+    <p>Rate This Movie!</p> 
+    <form action="#" @submit.prevent="handleSubmit">
+      <input type="text" name="username" id="username" v-model="username" placeholder="Enter username">
+      <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+      <button>Rate Movie</button>
+    </form>  
+  </div>
 </template>
 
 

@@ -5,11 +5,7 @@ import { useLocalStorage } from '@vueuse/core';
 export const useMovieStore = defineStore('MovieStore', () => {
   const movies = ref([]);
   const user = ref('');
-  const userRating = useLocalStorage('movie-rating', {
-    username: '',
-    rating: 0,
-    movieId: '',
-  });
+  const userRating = useLocalStorage('movie-rating', []);
 
   async function getMovies(title) {
     const apiKey = import.meta.env.VITE_OMDBAPI_KEY;

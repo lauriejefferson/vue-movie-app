@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import RatingModal from '../components/RatingModal.vue'
+import UserRating from '../components/UserRating.vue'
 
 const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
 const route = useRoute()
@@ -56,12 +56,7 @@ function goBack(){
                     </div>
                    </li>
                    <p>User Rating:</p>
-                    <button @click="showModal = true">Rate Movie</button>
-
-                    <Teleport to="body">
-                        <rating-modal :show="showModal"  @close="showModal = false" class="modal"></rating-modal>
-                    </Teleport>
-
+                    <UserRating :id="props.id"/>
                 </ul>
             </li>
           </ul>
