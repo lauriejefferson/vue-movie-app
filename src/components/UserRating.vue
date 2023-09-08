@@ -30,22 +30,28 @@ const handleSubmit = () => {
 
 </script>
 <template>
-  <div v-show="rated">
-    <div v-for="userRating in movieStore.userRating" :key="userRating.movieId">
-      <div v-if="userRating.movieId === props.id">
-        username: {{ userRating.username }}
-        <Rating v-model="userRating.rating" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+    <div v-show="rated">
+      <p>Movie already rated!</p>
+    </div>
+    <div v-show="!rated">
+    <p>Rate This Movie!</p> 
+      <form action="#" @submit.prevent="handleSubmit">
+        <input type="text" name="username" id="username" v-model="username" placeholder="Enter username">
+        <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+        <button>Rate Movie</button>
+      </form>    
+    </div>
+    <div>
+      <div v-for="userRating in movieStore.userRating" :key="userRating.movieId">
+        <div v-if="userRating.movieId === props.id">
+          username: {{ userRating.username }}
+          <Rating v-model="userRating.rating" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+        </div>
       </div>
     </div>
-  </div>
-  <div v-show="!rated">
-    <p>Rate This Movie!</p> 
-    <form action="#" @submit.prevent="handleSubmit">
-      <input type="text" name="username" id="username" v-model="username" placeholder="Enter username">
-      <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
-      <button>Rate Movie</button>
-    </form>  
-  </div>
+
+        
+    
 </template>
 
 
