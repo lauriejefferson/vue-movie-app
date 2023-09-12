@@ -49,8 +49,6 @@ const handleSubmit = () => {
         </div>
       </div>
     </div>
-
-        
     
 </template>
 

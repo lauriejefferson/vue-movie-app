@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import UserRating from '../components/UserRating.vue'
+import MovieRating from '../components/MovieRating.vue'
 
 const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
 const route = useRoute()
@@ -55,8 +56,13 @@ function goBack(){
                         <p>{{ rating.Value }}</p>
                     </div>
                    </li>
-                   <p>User Rating:</p>
+                   <li>
+                    <p>User Rating:</p>
                     <UserRating :id="props.id"/>
+                   </li>
+                   <li>
+                    <MovieRating :id="props.movieId"/>
+                   </li>
                 </ul>
             </li>
           </ul>
