@@ -14,7 +14,7 @@ const value = ref(null);
 const username = ref('');
 const movieStore = useMovieStore()
 const rated = ref(false)
-console.log(props.id)
+console.log("Movie Id: ", props.id)
 const handleSubmit = () => {
    if (movieStore.userRating
         .map(userRating => userRating.username)

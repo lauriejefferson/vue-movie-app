@@ -14,12 +14,12 @@ const rating = ref(1)
 const value = ref(null);
 const showModal = ref(false)
 
-console.log(router)
+// console.log(router)
 onMounted(async() => {
     let res = ref("")
     res.value = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&i=${props.id}`)
     movie.value = await res.value.json()
-    console.log(movie.value)
+    // console.log(movie.value)
 })
 
 function goBack(){
@@ -61,7 +61,7 @@ function goBack(){
                     <UserRating :id="props.id"/>
                    </li>
                    <li>
-                    <MovieRating :id="props.movieId"/>
+                    <MovieRating :id="props.id"/>
                    </li>
                 </ul>
             </li>
