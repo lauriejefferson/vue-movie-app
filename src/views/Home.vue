@@ -26,23 +26,25 @@ const handleSort = (e) => {
 </script>
 <template>
   <div class="container">
-    <h1>Search Movies</h1>
+    <h1 class="title">Search Movies</h1>
     <div class="search">
-      <form @submit.prevent="movieStore.getMovies(title)" class="form">
+      <form @submit.prevent="movieStore.getMovies(title)">
         <input type="text" placeholder="Enter movie title" v-model="title">   
         <button>Search</button>
       </form>
-      <select v-model="selected" class="select" @change="handleSelected">
-        <option disabled value="">Select a Movie Type</option>
-        <option>movie</option>
-        <option>series</option>
-        <option>episode</option>
-      </select>
-      <select v-model="sorted" class="select" @change="handleSort">
-        <option disabled value="">Sort By</option>
-        <option>year</option>
-        <option>title</option>
-      </select>
+      <div class="filters">
+        <select v-model="selected" class="select" @change="handleSelected">
+          <option disabled value="">Select a Movie Type</option>
+          <option>movie</option>
+          <option>series</option>
+          <option>episode</option>
+        </select>
+        <select v-model="sorted" class="select" @change="handleSort">
+          <option disabled value="">Sort By</option>
+          <option>year</option>
+          <option>title</option>
+        </select>
+      </div>
     </div>
     <div class="gallery">
       <div v-show="isFiltered" v-for="(movie, keyIndex) in filteredMovies" :key="keyIndex" class="card">
@@ -70,35 +72,53 @@ const handleSort = (e) => {
           </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 <style scoped>
-
 .search {
   display: flex;
-  margin-bottom: 3em;
-}
-
-form {
-  display: flex;
-}
-
- input {
-  border: 2px solid #C9C9CF;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
   width: 100%;
 }
+
+.title {
+  text-align: center;
+}
+form {
+  display: flex;
+  width: 70%;
+}
+
+ form input {
+  border: 2px solid #C9C9CF;
+  padding: 1em;
+  width: 100%;
+}
+
  button {
   border: none;
-  background-color: #5465FF;
+  background-color: #0cc361;
   color: white;
   text-transform: uppercase;
   padding: 10px 30px;
   cursor: pointer;
 }
+.filters {
+    margin: 0 1em;
+}
+select {
+  background-color: rgb(248, 248, 248);
+  border: none;
+  margin-right: 0.25em;
+  padding: 1.2em;
+  text-transform: uppercase;
+}
 .card {
   width: 100%;
   text-align: center;
-  border: 2px solid chartreuse;
+  border: 2px solid gold;
   padding-bottom: 1em;
 
 }
@@ -115,17 +135,14 @@ form {
   text-transform: uppercase;
   cursor: pointer;
   text-decoration: none;
-  color: #FF570A;
+  color: white;
   font-weight: 700;
-  background-color: #B8EBD0;
+  background-color: #0cc361;
   padding: 10px 30px;
 }
-
-
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 300px);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, 300px);
+  gap: 1.2em;
 }
 </style>

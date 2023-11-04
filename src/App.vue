@@ -40,7 +40,7 @@ li {
 header {
     display: flex;
     justify-content: space-between;
-    margin-top: 1em;
+    margin: 1em;
 }
 
 .nav-list {
