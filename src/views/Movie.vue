@@ -29,10 +29,8 @@ function goBack(){
 <template>
     <button @click="goBack">Go Back</button>
     <h1 class="title">{{ movie.Title }}</h1>
-    <div class="container">
-        <div>
-            <img :src=" movie.Poster" alt="">
-        </div>
+    <div class="movie-container">
+        <img :src=" movie.Poster" alt="">
         <div>
           <h2>Plot</h2>
           {{ movie.Plot }}
@@ -82,12 +80,10 @@ ul {
 li {
     list-style-type: none;
 }
-.container {
+.movie-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-    align-content: center;
-    gap: 10px;
+    gap: 2.5em;
 }
 .ratings {
     display: flex;

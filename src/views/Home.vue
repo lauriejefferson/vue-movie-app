@@ -88,7 +88,7 @@ const handleSort = (e) => {
 }
 form {
   display: flex;
-  width: 70%;
+  width: 47%;
 }
 
  form input {
@@ -115,14 +115,13 @@ select {
   padding: 1.2em;
   text-transform: uppercase;
 }
+
 .card {
   width: 100%;
   text-align: center;
   border: 2px solid gold;
   padding-bottom: 1em;
-
 }
-
 .card h2 {
   text-align: center;
 }
@@ -142,7 +141,8 @@ select {
 }
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, 300px);
+  grid-template-columns: repeat(3, 1fr);
+  place-content: center;
   gap: 1.2em;
 }
 </style>
