@@ -1,15 +1,20 @@
 <script setup>
-import { ref, onMounted, computed, h } from 'vue';
-import { useMovieStore } from '../stores/MovieStore';
+import { ref, onMounted, computed } from 'vue';
+import MovieCard from '@/components/MovieCard.vue';
+import { useMovieStore } from '@/stores/MovieStore';
 
 const title = ''
 const isFiltered = ref(false)
 const isSorted = ref(false)
 const selected = ref('')
 const sorted = ref('')
+
 const movieStore = useMovieStore()
 const filteredMovies = ref([])
 const sortedMovies = ref([])
+
+const movieArr = movieStore.movies;
+console.log(movieArr);
 
 const handleSelected = (e) => {
  isFiltered.value = true;
@@ -64,7 +69,7 @@ const handleSort = (e) => {
           </div>
       </div>
       <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movieStore.movies.Search" :key="index" class="card">
-          <img :src="movie.Poster" alt="poser">
+        <img :src="movie.Poster" alt="poster">
           <h2>{{ movie.Title }}</h2>
           <p>{{ movie.Year }}</p>
           <div class="link">

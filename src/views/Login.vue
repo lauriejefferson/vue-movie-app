@@ -7,7 +7,11 @@
      <form action="#">
         <input type="email" placeholder="Enter your email"> 
         <input type="email" placeholder="Enter your password">
+        <div class="btn">
         <button>Log in</button> 
+        <button>Sign up</button> 
+        </div>
+        
      </form>
     </div>
 </template>
@@ -30,14 +34,19 @@ input {
     border: 1px solid #C9C9CF;
     width: 100%;
 }
-
+.btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.25em;
+    width: 100%;
+}
 button {
     font-size: 1.125rem;
     text-transform: uppercase;
     border: none;
     background-color: #5465FF;
     color: white;
-    width: 100%;
+    width: 50%;
     height: 45px;
 }
 </style>

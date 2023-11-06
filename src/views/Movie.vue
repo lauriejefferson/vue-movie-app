@@ -2,8 +2,8 @@
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import UserRating from '../components/UserRating.vue'
-import MovieRating from '../components/MovieRating.vue'
+import UserRating from '@/components/UserRating.vue'
+import MovieRating from '@/components/MovieRating.vue'
 
 const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
 const route = useRoute()
@@ -19,7 +19,7 @@ onMounted(async() => {
     let res = ref("")
     res.value = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&i=${props.id}`)
     movie.value = await res.value.json()
-    // console.log(movie.value)
+    console.log(movie.value)
 })
 
 function goBack(){
