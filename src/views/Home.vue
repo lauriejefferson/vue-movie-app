@@ -13,9 +13,7 @@ const movieStore = useMovieStore()
 const filteredMovies = ref([])
 const sortedMovies = ref([])
 
-const movieArr = movieStore.movies;
-console.log(movieArr);
-
+console.log(movieStore.movies);
 const handleSelected = (e) => {
  isFiltered.value = true;
  filteredMovies.value = movieStore.getFilteredMovies(selected.value);

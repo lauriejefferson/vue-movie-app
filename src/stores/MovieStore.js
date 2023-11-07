@@ -4,6 +4,7 @@ import { useLocalStorage } from '@vueuse/core';
 
 export const useMovieStore = defineStore('MovieStore', () => {
   const movies = ref([]);
+  const movie = ref([]);
   const user = ref('');
   const userRating = useLocalStorage('user-rating', []);
   const movieRating = useLocalStorage('movie-rating', []);
@@ -14,6 +15,14 @@ export const useMovieStore = defineStore('MovieStore', () => {
       `http://www.omdbapi.com/?apikey=${apiKey}&s=${title}`
     );
     movies.value = await response.json();
+  }
+
+  async function getMovie(id) {
+    const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
+    const response = await fetch(
+      `http://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
+    );
+    movie.value = await response.json();
   }
 
   function getFilteredMovies(selected) {
@@ -36,7 +45,9 @@ export const useMovieStore = defineStore('MovieStore', () => {
   }
 
   return {
+    movie,
     movies,
+    getMovie,
     getMovies,
     getFilteredMovies,
     getSortedMovies,
