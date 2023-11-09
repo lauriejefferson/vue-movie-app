@@ -1,5 +1,4 @@
 <script setup>
-import Card from 'primevue/card';
 const props = defineProps({
     movie: {
         Poster: String,
@@ -8,20 +7,22 @@ const props = defineProps({
     }
 });
 
-console.log("Movies: ", props.movie.Title)
+console.log("Movies: ", props.movie)
 
 </script>
 
 <template>
     <div>
-        <Card style="width: 20em">
+        <Card class="card" style="min-height: 100vh;">
             <template #header>
                 <img alt="user header" :src="movie.Poster" />
             </template>
             <template #title> {{movie.Title}} </template>
             <template #subtitle> {{movie.Year }} </template>
             <template #footer>
-                <Button icon="pi pi-check" label="Details" />
+             <router-link :to="{ name: 'Movie', params: { id: movie.imdbID } }">
+                <Button icon="pi pi-check" label="Details" severity="success"/>
+             </router-link>
             </template>
         </Card>
     </div>  

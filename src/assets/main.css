@@ -25,7 +25,7 @@ h6 {
 }
 
 img {
-  width: 100%;
+  min-width: 100%;
 }
 
 ul,
@@ -47,4 +47,10 @@ a {
   justify-content: center;
   align-items: center;
   margin: 0 1em;
+}
+
+
+.card img {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }

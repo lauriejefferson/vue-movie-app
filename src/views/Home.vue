@@ -49,30 +49,15 @@ const handleSort = (e) => {
         </select>
       </div>
     </div>
-    <div class="gallery">
-      <div v-show="isFiltered" v-for="(movie, keyIndex) in filteredMovies" :key="keyIndex" class="card">
-         <img :src="movie.Poster" alt="poster">
-          <h2>{{ movie.Title }}</h2>
-          <p>{{ movie.Year }}</p>
-          <div class="link">
-            <router-link :to="{ name: 'Movie', params: { id: movie.imdbID } }">Details</router-link>
-          </div>
+    <div class="grid">
+      <div v-show="isFiltered" v-for="(movie, keyIndex) in filteredMovies" :key="keyIndex" class="col-4">
+        <movie-card :movie="movie"/>
       </div> 
-      <div v-show="isSorted" v-for="(movie, index) in sortedMovies" :key="index" class="card">
-          <img :src="movie.Poster" alt="poster">
-          <h2>{{ movie.Title }}</h2>
-          <p>{{ movie.Year }}</p>
-          <div class="link">
-            <router-link :to="{ name: 'Movie', params: { id: movie.imdbID } }">Details</router-link>
-          </div>
+      <div v-show="isSorted" v-for="(movie, index) in sortedMovies" :key="index" class="col-4">
+        <movie-card :movie="movie"/>
       </div>
-      <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movieStore.movies.Search" :key="index" class="card">
-        <img :src="movie.Poster" alt="poster">
-          <h2>{{ movie.Title }}</h2>
-          <p>{{ movie.Year }}</p>
-          <div class="link">
-            <router-link :to="{ name: 'Movie', params: { id: movie.imdbID } }">Details</router-link>
-          </div>
+      <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movieStore.movies.Search" :key="index" class="col-4">
+        <movie-card :movie="movie"/>
       </div>
     </div>
   </div>
@@ -119,15 +104,6 @@ select {
   text-transform: uppercase;
 }
 
-.card {
-  width: 100%;
-  text-align: center;
-  border: 2px solid gold;
-  padding-bottom: 1em;
-}
-.card h2 {
-  text-align: center;
-}
 
 .link {
   margin: 1.2em 0;
@@ -142,10 +118,5 @@ select {
   background-color: #0cc361;
   padding: 10px 30px;
 }
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  place-content: center;
-  gap: 1.2em;
-}
+
 </style>
