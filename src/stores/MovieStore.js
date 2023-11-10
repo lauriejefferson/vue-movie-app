@@ -6,8 +6,10 @@ export const useMovieStore = defineStore('MovieStore', () => {
   const movies = ref([]);
   const movie = ref([]);
   const user = ref('');
-  const userRating = useLocalStorage('user-rating', []);
-  const movieRating = useLocalStorage('movie-rating', []);
+  const userRating = useLocalStorage('user-rating', [
+    { movieId: '', username: '', rating: 0 },
+  ]);
+  const movieRating = useLocalStorage('movie-rating', [{}]);
 
   async function getMovies(title) {
     const apiKey = import.meta.env.VITE_OMDBAPI_KEY;

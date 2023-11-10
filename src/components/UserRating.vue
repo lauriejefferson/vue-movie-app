@@ -1,7 +1,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import Rating from 'primevue/rating';
+
 import { useMovieStore } from '../stores/MovieStore';
 
 
@@ -16,18 +16,9 @@ const movieStore = useMovieStore()
 const rated = ref(false)
 console.log("Movie Id: ", props.id)
 const handleSubmit = () => {
-   if (movieStore.userRating
-        .map(userRating => userRating.username)
-        .includes(username.value)
-        ){
-          rated.value = true
-        }
-  else {
-    movieStore.userRating.unshift({username: username.value, rating: value.value, movieId: props.id})
-    console.log(movieStore.userRating)
-  }
+movieStore.userRating = [...movieStore.userRating, { movieId: props.id, username: username.value, rating: value.value }]
+movieStore.userRating.forEach((userRating) => console.log(userRating.username))
 }
-
 </script>
 <template>
     <div v-show="rated">

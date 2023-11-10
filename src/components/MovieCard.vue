@@ -13,7 +13,7 @@ console.log("Movies: ", props.movie)
 
 <template>
     <div>
-        <Card class="card" style="min-height: 100vh;">
+        <Card class="card">
             <template #header>
                 <img alt="user header" :src="movie.Poster" />
             </template>
