@@ -10,20 +10,17 @@ const selected = ref('')
 const sorted = ref('')
 
 const movieStore = useMovieStore()
-const filteredMovies = ref([])
-const sortedMovies = ref([])
 
-console.log(movieStore.movies);
-const handleSelected = (e) => {
+
+const handleSelected = () => {
  isFiltered.value = true;
- filteredMovies.value = movieStore.getFilteredMovies(selected.value);
- console.log(filteredMovies)
+ movieStore.getFilteredMovies(selected.value);
+ console.log(isFiltered)
 }
 
 const handleSort = (e) => {
   isSorted.value = true;
-  sortedMovies.value = movieStore.getSortedMovies(sorted.value)
-  console.log(sortedMovies.value)
+  movieStore.getSortedMovies(sorted.value)
 }
 
 </script>
@@ -50,10 +47,10 @@ const handleSort = (e) => {
       </div>
     </div>
     <div class="grid">
-      <div v-show="isFiltered" v-for="(movie, keyIndex) in filteredMovies" :key="keyIndex" class="col-4">
+      <div v-show="isFiltered && !isSorted" v-for="(movie, index) in movieStore.filteredMovies" :key="index" class="col-4">
         <movie-card :movie="movie"/>
       </div> 
-      <div v-show="isSorted" v-for="(movie, index) in sortedMovies" :key="index" class="col-4">
+      <div v-show="isSorted && isFiltered" v-for="(movie, index) in movieStore.sortedMovies" :key="index" class="col-4">
         <movie-card :movie="movie"/>
       </div>
       <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movieStore.movies.Search" :key="index" class="col-4">

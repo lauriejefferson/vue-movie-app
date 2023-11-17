@@ -7,7 +7,7 @@ const props = defineProps({
     }
 });
 
-console.log("Movies: ", props.movie)
+// console.log("Movies: ", props.movie)
 
 </script>
 

@@ -4,6 +4,8 @@ import { useLocalStorage } from '@vueuse/core';
 
 export const useMovieStore = defineStore('MovieStore', () => {
   const movies = ref([]);
+  const filteredMovies = ref([]);
+  const sortedMovies = ref([]);
   const movie = ref([]);
   const user = ref('');
   const userRating = useLocalStorage('user-rating', [
@@ -17,6 +19,7 @@ export const useMovieStore = defineStore('MovieStore', () => {
       `http://www.omdbapi.com/?apikey=${apiKey}&s=${title}`
     );
     movies.value = await response.json();
+    console.log(movies.value);
   }
 
   async function getMovie(id) {
@@ -29,12 +32,14 @@ export const useMovieStore = defineStore('MovieStore', () => {
 
   function getFilteredMovies(selected) {
     console.log(selected);
-    return [...movies.value.Search].filter((movie) => movie.Type === selected);
+    filteredMovies.value = [...movies.value.Search].filter(
+      (movie) => movie.Type === selected
+    );
   }
 
   function getSortedMovies(sorted) {
     console.log(sorted);
-    return [...movies.value.Search].sort((a, b) => {
+    sortedMovies.value = [...movies.value.Search].sort((a, b) => {
       if (sorted === 'year') return a.Year - b.Year;
       if (sorted === 'title') {
         let aTitle = a.Title.toLowerCase();
@@ -49,6 +54,8 @@ export const useMovieStore = defineStore('MovieStore', () => {
   return {
     movie,
     movies,
+    filteredMovies,
+    sortedMovies,
     getMovie,
     getMovies,
     getFilteredMovies,
