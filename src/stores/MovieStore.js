@@ -6,7 +6,7 @@ export const useMovieStore = defineStore('MovieStore', () => {
   const movies = ref([]);
   const filteredMovies = ref([]);
   const sortedMovies = ref([]);
-  const movie = ref([]);
+
   const user = ref('');
   const userRating = useLocalStorage('user-rating', [
     { movieId: '', username: '', rating: 0 },
@@ -20,14 +20,6 @@ export const useMovieStore = defineStore('MovieStore', () => {
     );
     movies.value = await response.json();
     console.log(movies.value);
-  }
-
-  async function getMovie(id) {
-    const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
-    const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
-    );
-    movie.value = await response.json();
   }
 
   function getFilteredMovies(selected) {
