@@ -19,7 +19,7 @@ export const useMovieStore = defineStore('MovieStore', () => {
       `http://www.omdbapi.com/?apikey=${apiKey}&s=${title}`
     );
     movies.value = await response.json();
-    console.log(movies.value);
+    // console.log(movies.value);
   }
 
   function getFilteredMovies(selected) {
@@ -44,11 +44,9 @@ export const useMovieStore = defineStore('MovieStore', () => {
   }
 
   return {
-    movie,
     movies,
     filteredMovies,
     sortedMovies,
-    getMovie,
     getMovies,
     getFilteredMovies,
     getSortedMovies,

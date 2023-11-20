@@ -1,69 +1,74 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onBeforeMount, ref, } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useMovieStore } from '@/stores/MovieStore';
+import getMovie from '../composables/getMovie';
 
 import UserRating from '@/components/UserRating.vue'
 import MovieRating from '@/components/MovieRating.vue'
+const props = defineProps({
+    id: String
+})
 
 const route = useRoute()
 const router = useRouter()
-const props = defineProps(['id'])
-const rating = ref(1)
-const value = ref(null);
-const showModal = ref(false)
-const movieStore = useMovieStore()
 
-// console.log(router)
-onMounted(async() => {
-    movieStore.getMovie(props.id)
-    // console.log("Movie: ", movieStore.movie)
+const showModal = ref(false)
+
+
+const {data: movie, error, load } = getMovie(props.id);
+
+onMounted(() => {
+    return load();
 })
+
+console.log(movie);
 
 function goBack(){
   router.push({name: 'Home'})
 }
+
 </script>
 <template>
     <button @click="goBack">Go Back</button>
-    <h1 class="title">{{ movieStore.movie.Title }}</h1>
-    <div class="movie-container">
-        <img :src=" movieStore.movie.Poster" alt="">
-        <div>
-          <h2>Plot</h2>
-          {{ movieStore.movie.Plot }}
-          <h2>Rated: {{ movieStore.movie.Rated }}</h2>
-          <ul>
-            <li>
-                <p>Release Year: {{ movieStore.movie.Year }}</p>
-            </li>
-            <li>
-                <p>Genre: {{ movieStore.movie.Genre}}</p>
-            </li>
-            <li>
-                <p>Actors: {{ movieStore.movie.Actors }}</p>
-            </li>
-            <li>
-                <h2>Ratings</h2>
-                <ul>
-                   <li v-for="(rating, index) in movieStore.movie.Ratings">
-                    <div class="ratings">
-                        <p>{{ rating.Source }}:</p> 
-                        <p>{{ rating.Value }}</p>
-                    </div>
-                   </li>
-                   <li>
-                    <p>User Rating:</p>
-                    <UserRating :id="props.id"/>
-                   </li>
-                   <li>
-                    <MovieRating :id="props.id"/>
-                   </li>
-                </ul>
-            </li>
-          </ul>
-        </div>
-
+    <div v-if="movie">
+        <h1 class="title">{{ movie.Title }}</h1>
+        <div class="movie-container">
+            <img :src=" movie.Poster" alt="">
+            <div>
+            <h2>Plot</h2>
+            {{ movie.Plot }}
+            <h2>Rated: {{ movie.Rated }}</h2>
+            <ul>
+                <li>
+                    <p>Release Year: {{ movie.Year }}</p>
+                </li>
+                <li>
+                    <p>Genre: {{ movie.Genre}}</p>
+                </li>
+                <li>
+                    <p>Actors: {{ movie.Actors }}</p>
+                </li>
+                <li>
+                    <h2>Ratings</h2>
+                    <ul>
+                    <li v-for="(rating, index) in movie.Ratings">
+                        <div class="ratings">
+                            <p>{{ rating.Source }}:</p> 
+                            <p>{{ rating.Value }}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <p>User Rating:</p>
+                        <UserRating :id="props.id"/>
+                    </li>
+                    <li>
+                        <MovieRating :id="props.id"/>
+                    </li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+    </div>
     </div>
 </template>
 <style scoped>
