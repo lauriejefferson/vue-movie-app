@@ -2,8 +2,9 @@
 import { ref, onMounted, computed } from 'vue';
 import MovieCard from '@/components/MovieCard.vue';
 import { useMovieStore } from '@/stores/MovieStore';
+import getMovies from '../composables/getMovies';
 
-const title = ''
+const title = ref('')
 const isFiltered = ref(false)
 const isSorted = ref(false)
 const selected = ref('')
@@ -11,16 +12,22 @@ const sorted = ref('')
 
 const movieStore = useMovieStore()
 
+const { movies, error, loadMovies} = getMovies();
+
+
+const handleSubmit = () => {
+  return loadMovies(title.value);
+}
 
 const handleSelected = () => {
  isFiltered.value = true;
- movieStore.getFilteredMovies(selected.value);
- console.log(isFiltered)
+//  movieStore.getFilteredMovies(selected.value);
+//  console.log(isFiltered)
 }
 
 const handleSort = (e) => {
   isSorted.value = true;
-  movieStore.getSortedMovies(sorted.value)
+  // movieStore.getSortedMovies(sorted.value)
 }
 
 </script>
@@ -28,7 +35,7 @@ const handleSort = (e) => {
   <div class="container">
     <h1 class="title">Search Movies</h1>
     <div class="search">
-      <form @submit.prevent="movieStore.getMovies(title)">
+      <form @submit.prevent="handleSubmit()">
         <input type="text" placeholder="Enter movie title" v-model="title">   
         <button>Search</button>
       </form>
@@ -53,7 +60,7 @@ const handleSort = (e) => {
       <div v-show="isSorted && isFiltered" v-for="(movie, index) in movieStore.sortedMovies" :key="index" class="col-4">
         <movie-card :movie="movie"/>
       </div>
-      <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movieStore.movies.Search" :key="index" class="col-4">
+      <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movies.Search" :key="index" class="col-4">
         <movie-card :movie="movie"/>
       </div>
     </div>

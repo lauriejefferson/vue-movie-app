@@ -1,11 +1,11 @@
 import { ref } from 'vue';
 
-const getMovie = (id) => {
+const getMovie = () => {
   const data = ref(null);
   const error = ref(null);
 
   const apiKey = import.meta.env.VITE_OMDBAPI_KEY;
-  const load = async () => {
+  const load = async (id) => {
     try {
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=${apiKey}&i=${id}`

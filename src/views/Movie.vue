@@ -14,11 +14,10 @@ const router = useRouter()
 
 const showModal = ref(false)
 
-
-const {data: movie, error, load } = getMovie(props.id);
+const {data: movie, error, load } = getMovie();
 
 onMounted(() => {
-    return load();
+    return load(props.id);
 })
 
 console.log(movie);
