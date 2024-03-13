@@ -5,7 +5,7 @@ import { useLocalStorage } from '@vueuse/core';
 export const useMovieStore = defineStore('MovieStore', () => {
   const user = ref('');
   const userRating = useLocalStorage('user-rating', [
-    { movieId: '', username: '', rating: 0 },
+    { movieId: '', username: '', rating: 0, comment: '' },
   ]);
   const movieRating = useLocalStorage('movie-rating', [{}]);
 
@@ -31,12 +31,6 @@ export const useMovieStore = defineStore('MovieStore', () => {
   // }
 
   return {
-    // movies,
-    // filteredMovies,
-    // sortedMovies,
-    // getMovies,
-    // getFilteredMovies,
-    // getSortedMovies,
     userRating,
     movieRating,
   };

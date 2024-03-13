@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 import Rating from 'primevue/rating';
 import { useMovieStore } from '../stores/MovieStore';
 
@@ -13,7 +13,6 @@ const currMovies = ref([]);
 const initalValue = 0;
 let reducer = 0;
 let totalRating = 0;
-let avgRating = 0;
 
 function getAverageRating() {
   currMovies.value = movieStore.userRating.filter(userRating => userRating.movieId === props.id)
@@ -35,7 +34,7 @@ watch(movieStore.userRating, () => {
 <template>
     <div>
         <h3>Average Movie Rating</h3>
-        <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin: 1em 0;" readonly/>
+        <Rating v-model="value" readonly :cancel="false" style="color: #FFCA3A; margin: 1em 0;" />
     </div>
 </template>
 

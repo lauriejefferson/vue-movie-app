@@ -1,9 +1,6 @@
 @import url('primeicons/primeicons.css');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&display=swap');
 
-
-
-
 *, ::after, ::before {
   box-sizing: border-box;
 }
@@ -25,7 +22,9 @@ h6 {
 }
 
 img {
+  display: block;
   min-width: 100%;
+  aspect-ratio: 1/1;
 }
 
 ul,
@@ -42,18 +41,6 @@ a {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 1em;
-}
-
-.card {
-  min-height: 89vh;
-}
-
-.card img {
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+  width: min(100% - 2rem, 1440px);
+  margin-inline: auto;
 }

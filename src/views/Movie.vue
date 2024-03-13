@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeMount, ref, } from 'vue';
+import { onMounted, onBeforeMount, ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import getMovie from '../composables/getMovie';
 
@@ -14,7 +14,7 @@ const router = useRouter()
 
 const showModal = ref(false)
 
-const {data: movie, error, load } = getMovie();
+const { data: movie, error, load } = getMovie();
 
 onMounted(() => {
     return load(props.id);
@@ -22,8 +22,8 @@ onMounted(() => {
 
 console.log(movie);
 
-function goBack(){
-  router.push({name: 'Home'})
+function goBack() {
+    router.push({ name: 'Home' })
 }
 
 </script>
@@ -32,61 +32,64 @@ function goBack(){
     <div v-if="movie">
         <h1 class="title">{{ movie.Title }}</h1>
         <div class="movie-container">
-            <img :src=" movie.Poster" alt="">
+            <img :src="movie.Poster" alt="poster">
             <div>
-            <h2>Plot</h2>
-            {{ movie.Plot }}
-            <h2>Rated: {{ movie.Rated }}</h2>
-            <ul>
-                <li>
-                    <p>Release Year: {{ movie.Year }}</p>
-                </li>
-                <li>
-                    <p>Genre: {{ movie.Genre}}</p>
-                </li>
-                <li>
-                    <p>Actors: {{ movie.Actors }}</p>
-                </li>
-                <li>
-                    <h2>Ratings</h2>
-                    <ul>
-                    <li v-for="(rating, index) in movie.Ratings">
-                        <div class="ratings">
-                            <p>{{ rating.Source }}:</p> 
-                            <p>{{ rating.Value }}</p>
-                        </div>
+                <h2>Plot</h2>
+                {{ movie.Plot }}
+                <h2>Rated: {{ movie.Rated }}</h2>
+                <ul>
+                    <li>
+                        <p>Release Year: {{ movie.Year }}</p>
+                    </li>
+                    <li class="flex">
+                        <p>Genre: {{ movie.Genre }}</p>
                     </li>
                     <li>
-                        <p>User Rating:</p>
-                        <UserRating :id="props.id"/>
+                        <p>Actors: {{ movie.Actors }}</p>
                     </li>
                     <li>
-                        <MovieRating :id="props.id"/>
+                        <h2>Ratings</h2>
+                        <ul>
+                            <li v-for="(rating, index) in movie.Ratings" :key="index">
+                                <div class="ratings">
+                                    <p>{{ rating.Source }}:</p>
+                                    <p>{{ rating.Value }}</p>
+                                </div>
+                            </li>
+                            <li>
+                                <p>User Rating:</p>
+                                <UserRating :id="props.id" />
+                            </li>
+                            <li>
+                                <MovieRating :id="props.id" />
+                            </li>
+                        </ul>
                     </li>
-                    </ul>
-                </li>
-            </ul>
+                </ul>
             </div>
-    </div>
+        </div>
     </div>
 </template>
 <style scoped>
-
 .title {
     text-align: center;
 }
 
 ul {
-    padding: 0;;
+    padding: 0;
+    ;
 }
+
 li {
     list-style-type: none;
 }
+
 .movie-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5em;
 }
+
 .ratings {
     display: flex;
     justify-content: space-between;
@@ -95,6 +98,7 @@ li {
 li p {
     font-size: 1.2rem;
 }
+
 button {
     color: white;
     font-size: 1.125rem;
@@ -107,15 +111,22 @@ button {
 }
 
 .modal {
-  position: fixed;
-  z-index: 999;
-  top: 50%;
-  left: 70%;
-  width: 300px;
-  margin-left: -100px;
-  padding: 2.5em;
-  background-color: #FAFAFA;
-  color: #136090;
-  font-weight: bold;
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 70%;
+    width: 300px;
+    margin-left: -100px;
+    padding: 2.5em;
+    background-color: #FAFAFA;
+    color: #136090;
+    font-weight: bold;
+}
+
+.tags {
+    display: flex;
+    width: 2em;
+    background-color: #18A999;
+    color: aquamarine;
 }
 </style>

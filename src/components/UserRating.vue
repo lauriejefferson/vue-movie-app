@@ -1,7 +1,9 @@
 
 <script setup>
 import {ref} from 'vue'
-
+import Rating from 'primevue/rating';
+import Textarea from 'primevue/textarea';
+import Card from 'primevue/card';
 import { useMovieStore } from '../stores/MovieStore';
 
 
@@ -11,12 +13,13 @@ const props = defineProps({
 });
 
 const value = ref(null);
+const comment = ref(null);
 const username = ref('');
 const movieStore = useMovieStore()
 const rated = ref(false)
 console.log("Movie Id: ", props.id)
 const handleSubmit = () => {
-movieStore.userRating = [...movieStore.userRating, { movieId: props.id, username: username.value, rating: value.value }]
+movieStore.userRating = [...movieStore.userRating, { movieId: props.id, username: username.value, rating: value.value, comment: comment.value }]
 movieStore.userRating.forEach((userRating) => console.log(userRating.username))
 }
 </script>
@@ -29,14 +32,20 @@ movieStore.userRating.forEach((userRating) => console.log(userRating.username))
       <form action="#" @submit.prevent="handleSubmit">
         <input type="text" name="username" id="username" v-model="username" placeholder="Enter username">
         <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+        <Textarea v-model="comment" row="5" cols="50" />
         <button>Rate Movie</button>
       </form>    
     </div>
     <div>
       <div v-for="userRating in movieStore.userRating" :key="userRating.movieId">
-        <div v-if="userRating.movieId === props.id">
-          username: {{ userRating.username }}
-          <Rating v-model="userRating.rating" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+        <div v-if="userRating.movieId === props.id" class="user-rating">
+          <Card style="margin-bottom: 1rem">
+            <template #title>{{ userRating.username }} </template>
+            <template #content>
+              <Rating v-model="userRating.rating" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;"/>
+              <p>{{ userRating.comment }}</p>
+            </template>
+          </Card>
         </div>
       </div>
     </div>
@@ -45,6 +54,7 @@ movieStore.userRating.forEach((userRating) => console.log(userRating.username))
 
 
 <style scoped>
+
 p {
     font-size: 1.25rem;
 }
