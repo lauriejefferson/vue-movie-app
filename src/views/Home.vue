@@ -32,7 +32,7 @@ const handleSort = (e) => {
 
 </script>
 <template>
-  <div class="container">
+  <div class="container mx-auto">
     <h1 class="title">Search Movies</h1>
     <div class="search">
       <form @submit.prevent="handleSubmit()">

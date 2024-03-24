@@ -8,7 +8,6 @@
 
 body {
   font-family: 'Nunito Sans', sans-serif;
-  max-width: 1280px;
   padding: 0;
 }
 
@@ -41,6 +40,10 @@ a {
 }
 
 .container {
-  width: min(100% - 2rem, 1440px);
+  width: min(100% - 2rem, 1400px);
+  margin-inline: auto;
+}
+
+#app {
   margin-inline: auto;
 }
