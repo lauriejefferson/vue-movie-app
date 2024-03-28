@@ -1,6 +1,6 @@
 # vue-movie-app
 
-This template should help get you started developing with Vue 3 in Vite.
+Users can search for movies by title, get movie details and rate movies.  Written in Vue 3 and PrimeVue.
 
 ## Recommended IDE Setup
 
