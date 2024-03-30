@@ -5,42 +5,53 @@ const props = defineProps({
         Poster: String,
         Title: String,
         Year: String,
+        Plot: String,
         imdbID: String
     }
 });
 
 </script>
 <template>
-    <Card style="height: 100%">
-        <template #header>
-            <!-- <Image v-bind:src="props.movie.Poster" alt="poster" width="300" preview /> -->
-            <img alt="poster" :src="props.movie.Poster" height="500" width="100%" />
-        </template>
-        <template #title>
-            {{ movie.Title }}
-        </template>
-        <template #subtitle>
-            {{ movie.Year }}
-        </template>
-        <template #footer>
-            <router-link :to="{ name: 'Movie', params: { id: props.movie.imdbID } }">
-                <Button icon="pi pi-check" label="Details" severity="success" />
-            </router-link>
+    <Card>
+        <template #content>
+            <div class="flex gap-5">
+                <div>
+                    <img alt="poster" :src="props.movie.Poster" height="200" width="150" />
+                </div>
+                <div class="flex flex-column main">
+                    <div class="title">
+                        {{ props.movie.Title }}
+                    </div>
+                    <div class="year">
+                        {{ props.movie.Year }}
+                    </div>
+                    <div class="description">
+                        {{ props.movie.Plot }}
+                    </div>
+                    <div class="footer">
+                        <router-link :to="{ name: 'Movie', params: { id: props.movie.imdbID } }">
+                            <Button icon="pi pi-check" label="Details" severity="success" />
+                        </router-link>
+                    </div>
+                </div>
+            </div>
         </template>
     </Card>
 
 </template>
 
 <style scoped>
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: auto auto auto auto auto;
-
+.title {
+    color: #424651;
+    font-weight: 800;
+    margin-bottom: 0.25em;
 }
 
-.card-grid {
-    display: grid;
-    grid-template-rows: subgrid;
+.year {
+    color: #A5ABB6;
+}
+
+.footer {
+    margin-top: auto;
 }
 </style>

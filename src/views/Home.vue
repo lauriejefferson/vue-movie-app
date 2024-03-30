@@ -55,13 +55,15 @@ const handleSort = (e) => {
     </div>
     <div class="grid">
       <div v-show="isFiltered && !isSorted" v-for="(movie, index) in movieStore.filteredMovies" :key="index"
-        class="col-4">
+        class="col-8 col-offset-2">
         <movie-card :movie="movie" />
       </div>
-      <div v-show="isSorted && isFiltered" v-for="(movie, index) in movieStore.sortedMovies" :key="index" class="col-4">
+      <div v-show="isSorted && isFiltered" v-for="(movie, index) in movieStore.sortedMovies" :key="index"
+        class="col-8 col-offset-2">
         <movie-card :movie="movie" />
       </div>
-      <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movies.Search" :key="index" class="col-4">
+      <div v-show="!isFiltered && !isSorted" v-for="(movie, index) in movies.Search" :key="index"
+        class="col-8 col-offset-2">
         <movie-card :movie="movie" />
       </div>
     </div>
