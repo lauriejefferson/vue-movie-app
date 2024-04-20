@@ -13,6 +13,10 @@ import PrimeVue from 'primevue/config';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Rating from 'primevue/rating';
+import Listbox from 'primevue/listbox';
+import Dropdown from 'primevue/dropdown';
+import InputText from 'primevue/inputtext';
+import InputGroup from 'primevue/inputgroup';
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -20,7 +24,11 @@ const app = createApp(App);
 app.component('Button', Button);
 app.component('Card', Card);
 app.component('Rating', Rating);
+app.component('Listbox', Listbox);
+app.component('Dropdown', Dropdown);
+app.component('InputText', InputText);
+app.component('InputGroup', InputGroup);
 
-app.use(pinia).use(router).use(PrimeVue);
+app.use(pinia).use(PrimeVue).use(router);
 
 app.mount('#app');

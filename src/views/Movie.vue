@@ -28,71 +28,87 @@ function goBack() {
 
 </script>
 <template>
-    <button @click="goBack">Go Back</button>
+    <Button @click="goBack" label="Go Back" text />
     <div v-if="movie">
         <h1 class="title">{{ movie.Title }}</h1>
         <div class="movie-container">
-            <img :src="movie.Poster" alt="poster">
-            <div>
-                <h2>Plot</h2>
-                {{ movie.Plot }}
-                <h2>Rated: {{ movie.Rated }}</h2>
-                <ul>
-                    <li>
-                        <p>Release Year: {{ movie.Year }}</p>
-                    </li>
-                    <li class="flex">
-                        <p>Genre: {{ movie.Genre }}</p>
-                    </li>
-                    <li>
-                        <p>Actors: {{ movie.Actors }}</p>
-                    </li>
-                    <li>
+            <div class="movie-info">
+                <div class="movie-poster">
+                    <img :src="movie.Poster" alt="poster" :style="{ 'height': '100%', 'width': '32%' }">
+                </div>
+                <div class="movie-description">
+                    <div class="plot">
+                        <h2>Plot</h2>
+                        <p>{{ movie.Plot }}</p>
+                    </div>
+                    <div class="flex">
+                        <h2>Rated: {{ movie.Rated }}</h2>
+                    </div>
+                    <div class="flex">
+                        <h2>Release Year:</h2>
+                        <p>{{ movie.Year }}</p>
+                    </div>
+                    <div class="flex">
+                        <h2>Genre: </h2>
+                        <p>{{ movie.Genre }}</p>
+                    </div>
+                    <div class="flex">
+                        <h2>Actors: </h2>
+                        <p>{{ movie.Actors }}</p>
+                    </div>
+                    <ul class="internet-ratings">
                         <h2>Ratings</h2>
-                        <ul>
-                            <li v-for="(rating, index) in movie.Ratings" :key="index">
-                                <div class="ratings">
-                                    <p>{{ rating.Source }}:</p>
-                                    <p>{{ rating.Value }}</p>
-                                </div>
-                            </li>
-                            <li>
-                                <p>User Rating:</p>
-                                <UserRating :id="props.id" />
-                            </li>
-                            <li>
-                                <MovieRating :id="props.id" />
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                        <li v-for="(rating, index) in movie.Ratings" :key="index">
+                            <div class="ratings">
+                                <p>{{ rating.Source }}:</p>
+                                <p>{{ rating.Value }}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="movie-ratings">
+                <div>
+                    <MovieRating :id="props.id" />
+                    <UserRating :id="props.id" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 <style scoped>
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
 .title {
     text-align: center;
 }
 
 ul {
     padding: 0;
-    ;
 }
 
 li {
     list-style-type: none;
 }
 
-.movie-container {
+.movie-info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5em;
+    gap: 1em;
+}
+
+.plot {
+    display: flex;
+    flex-direction: column;
 }
 
 .ratings {
     display: flex;
-    justify-content: space-between;
+    gap: 1em;
 }
 
 li p {
@@ -100,33 +116,10 @@ li p {
 }
 
 button {
-    color: white;
     font-size: 1.125rem;
-    text-transform: uppercase;
     border: none;
-    background-color: #18A999;
     margin: 10px 50px;
     padding: 15px 30px;
     cursor: pointer;
-}
-
-.modal {
-    position: fixed;
-    z-index: 999;
-    top: 50%;
-    left: 70%;
-    width: 300px;
-    margin-left: -100px;
-    padding: 2.5em;
-    background-color: #FAFAFA;
-    color: #136090;
-    font-weight: bold;
-}
-
-.tags {
-    display: flex;
-    width: 2em;
-    background-color: #18A999;
-    color: aquamarine;
 }
 </style>

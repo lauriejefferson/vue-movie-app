@@ -15,10 +15,10 @@ let reducer = 0;
 let totalRating = 0;
 
 function getAverageRating() {
-  currMovies.value = movieStore.userRating.filter(userRating => userRating.movieId === props.id)
-  reducer = (acc, curr) => acc + parseInt(curr.rating)
-  totalRating = currMovies.value.reduce(reducer, initalValue)
-  value.value = Math.round(totalRating / currMovies.value.length)
+    currMovies.value = movieStore.userRating.filter(userRating => userRating.movieId === props.id)
+    reducer = (acc, curr) => acc + parseInt(curr.rating)
+    totalRating = currMovies.value.reduce(reducer, initalValue)
+    value.value = Math.round(totalRating / currMovies.value.length)
 }
 
 onMounted(() => {
@@ -32,12 +32,15 @@ watch(movieStore.userRating, () => {
 </script>
 
 <template>
-    <div>
+    <div class="flex">
         <h3>Average Movie Rating</h3>
         <Rating v-model="value" readonly :cancel="false" style="color: #FFCA3A; margin: 1em 0;" />
     </div>
 </template>
 
 <style scoped>
-
+.flex {
+    display: flex;
+    gap: 1em;
+}
 </style>

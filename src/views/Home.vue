@@ -2,14 +2,24 @@
 import { ref, onMounted, computed } from 'vue';
 import MovieCard from '@/components/MovieCard.vue';
 import { useMovieStore } from '@/stores/MovieStore';
-import getMovies from '../composables/getMovies';
+import getMovies from '@/composables/getMovies';
+import InputGroup from 'primevue/inputgroup';
+
 
 const title = ref('')
 const isFiltered = ref(false)
 const isSorted = ref(false)
 const selected = ref('')
 const sorted = ref('')
-
+const movieType = ref([
+  { name: 'Movie', code: 'mv' },
+  { name: 'Series', code: 'sr' },
+  { name: 'Episode', code: 'ep' },
+])
+const sortBy = ref([
+  { name: 'Year', code: 'yr' },
+  { name: 'Title', code: 'tl' }
+])
 const movieStore = useMovieStore()
 
 const { movies, error, loadMovies } = getMovies();
@@ -28,7 +38,7 @@ const handleSelected = () => {
 const handleSort = (e) => {
   isSorted.value = true;
   // movieStore.getSortedMovies(sorted.value)
-}
+};
 
 </script>
 <template>
@@ -36,21 +46,20 @@ const handleSort = (e) => {
     <h1 class="title">Search Movies</h1>
     <div class="search">
       <form @submit.prevent="handleSubmit()">
-        <input type="text" placeholder="Enter movie title" v-model="title">
-        <button>Search</button>
+        <InputGroup>
+          <InputText type="text" placeholder="Enter movie title" v-model="title" />
+          <Button type="submit" icon="pi pi-search" />
+        </InputGroup>
       </form>
       <div class="filters">
-        <select v-model="selected" class="select" @change="handleSelected">
-          <option disabled value="">Select a Movie Type</option>
-          <option>movie</option>
-          <option>series</option>
-          <option>episode</option>
-        </select>
-        <select v-model="sorted" class="select" @change="handleSort">
-          <option disabled value="">Sort By</option>
-          <option>year</option>
-          <option>title</option>
-        </select>
+        <div class="card flex justify-content-center">
+          <Dropdown v-model="selected" :options="movieType" optionLabel="name" placeholder='Movie type'
+            class="w-full md:w-14rem" @change="handleSelected" />
+        </div>
+        <div class="card flex justify-content-center">
+          <Dropdown v-model="sorted" :options="sortBy" optionLabel="name" placeholder='Sort By'
+            class="w-full md:w-14rem" @change="handleSort" />
+        </div>
       </div>
     </div>
     <div class="grid">
@@ -103,7 +112,9 @@ button {
 }
 
 .filters {
-  margin: 0 1em;
+  display: flex;
+  gap: 1em;
+  margin-left: 0.5em;
 }
 
 select {
