@@ -17,6 +17,8 @@ import Listbox from 'primevue/listbox';
 import Dropdown from 'primevue/dropdown';
 import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
+import Dialog from 'primevue/dialog';
+import Textarea from 'primevue/textarea';
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -28,6 +30,8 @@ app.component('Listbox', Listbox);
 app.component('Dropdown', Dropdown);
 app.component('InputText', InputText);
 app.component('InputGroup', InputGroup);
+app.component('Dialog', Dialog);
+app.component('Textarea', Textarea);
 
 app.use(pinia).use(PrimeVue).use(router);
 

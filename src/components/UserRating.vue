@@ -3,11 +3,11 @@ import { ref } from 'vue'
 import Rating from 'primevue/rating';
 import Textarea from 'primevue/textarea';
 import Card from 'primevue/card';
-import { useMovieStore } from '../stores/MovieStore';
-
+import { useMovieStore } from '../stores/MovieStore'
 
 const props = defineProps({
   show: Boolean,
+  visible: Boolean,
   id: String
 });
 
@@ -27,13 +27,15 @@ const handleSubmit = () => {
     <p>Movie already rated!</p>
   </div>
   <div v-show="!rated">
-    <p>Rate This Movie!</p>
-    <form action="#" @submit.prevent="handleSubmit">
-      <InputText type="text" name="username" id="username" v-model="username" placeholder="Enter username" />
-      <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;" />
-      <Textarea v-model="comment" row="5" cols="50" />
-      <Button type="Submit" label="Rate Movie" />
-    </form>
+    <Dialog v-model:visible="props.visible" modal header="Rate Movie">
+      <form action="#" @submit.prevent="handleSubmit">
+        <InputText type="text" name="username" id="username" v-model="username" placeholder="Enter username" />
+        <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;" />
+        <Textarea v-model="comment" row="5" cols="50" />
+        <Button type="Submit" label="Rate Movie" />
+        <Button type="button" label="Close" @click="visible = false" />
+      </form>
+    </Dialog>
   </div>
   <div>
     <div v-for="userRating in movieStore.userRating" :key="userRating.movieId">

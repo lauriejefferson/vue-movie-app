@@ -4,15 +4,19 @@ import { useRoute, useRouter } from 'vue-router';
 import getMovie from '../composables/getMovie';
 
 import UserRating from '@/components/UserRating.vue'
-import MovieRating from '@/components/MovieRating.vue'
+import AverageMovieRating from '@/components/AverageMovieRating.vue'
+import { useMovieStore } from '../stores/MovieStore';
 const props = defineProps({
     id: String
 })
-
+const movieStore = useMovieStore()
 const route = useRoute()
 const router = useRouter()
-
+const visible = ref(false)
 const showModal = ref(false)
+const value = ref(null);
+const comment = ref(null);
+const username = ref('');
 
 const { data: movie, error, load } = getMovie();
 
@@ -25,6 +29,11 @@ console.log(movie);
 function goBack() {
     router.push({ name: 'Home' })
 }
+
+
+const handleSubmit = () => {
+    movieStore.addRating({ movieId: props.id, username: username.value, rating: value.value, comment: comment.value })
+};
 
 </script>
 <template>
@@ -63,15 +72,36 @@ function goBack() {
                                 <p>{{ rating.Source }}:</p>
                                 <p>{{ rating.Value }}</p>
                             </div>
+
                         </li>
                     </ul>
+                    <div class="avg-movie-rating">
+                        <!-- <AverageMovieRating :id="props.id" /> -->
+                    </div>
                 </div>
             </div>
             <div class="movie-ratings">
-                <div>
-                    <MovieRating :id="props.id" />
-                    <UserRating :id="props.id" />
-                </div>
+                <Button label="Rate Movie" @click="visible = true" class="mt-3" />
+                <Dialog v-model:visible="visible" modal header="Rate Movie" :style="{ width: '25rem' }">
+                    <form action="#" @submit.prevent="handleSubmit">
+                        <div class="flex align-items-center gap-3 mb-3">
+                            <InputText type="text" name="username" id="username" v-model="username"
+                                placeholder="Enter username" />
+                        </div>
+                        <div class="flex align-items-center gap-3 mb-3">
+                            <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;" />
+                        </div>
+                        <div class="flex-align-items-center gap-3 mb-3">
+                            <Textarea v-model="comment" rows="5" cols="25" autoResize />
+                        </div>
+                        <div class="flex justify-content-start gap-2">
+                            <Button type="Submit" label="Add Rating" />
+                        </div>
+                    </form>
+                </Dialog>
+            </div>
+            <div class="show-rating" v-if="movieStore.rated">
+                <p class="not-rated">Movie already rated!</p>
             </div>
         </div>
     </div>
@@ -116,10 +146,10 @@ li p {
 }
 
 button {
-    font-size: 1.125rem;
-    border: none;
-    margin: 10px 50px;
-    padding: 15px 30px;
     cursor: pointer;
+}
+
+.not-rated {
+    color: var(--red-500)
 }
 </style>

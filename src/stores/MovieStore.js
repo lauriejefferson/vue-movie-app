@@ -4,11 +4,28 @@ import { useLocalStorage } from '@vueuse/core';
 
 export const useMovieStore = defineStore('MovieStore', () => {
   const user = ref('');
-  const userRating = useLocalStorage('user-rating', [
-    { movieId: '', username: '', rating: 0, comment: '' },
-  ]);
-  const movieRating = useLocalStorage('movie-rating', [{}]);
+  const rated = ref(false);
+  const userRating = useLocalStorage('user-ratings', []);
+  const movieRating = useLocalStorage('movie-ratings', []);
 
+  function addRating(userLocalRating) {
+    userRating.value.forEach((item) => {
+      if (
+        item.username === userLocalRating.username &&
+        item.movieId === userLocalRating.movieId
+      ) {
+        rated.value = true;
+      } else {
+        rated.value = false;
+      }
+    });
+
+    if (rated.value === false) {
+      rated.value = true;
+      userRating.value.push(userLocalRating);
+    }
+    console.log(userRating.value);
+  }
   // function getFilteredMovies(selected) {
   //   console.log(selected);
   //   filteredMovies.value = [...movies.value.Search].filter(
@@ -33,5 +50,7 @@ export const useMovieStore = defineStore('MovieStore', () => {
   return {
     userRating,
     movieRating,
+    addRating,
+    rated,
   };
 });
