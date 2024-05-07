@@ -19,6 +19,7 @@ import InputText from 'primevue/inputtext';
 import InputGroup from 'primevue/inputgroup';
 import Dialog from 'primevue/dialog';
 import Textarea from 'primevue/textarea';
+import Knob from 'primevue/knob';
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -32,6 +33,7 @@ app.component('InputText', InputText);
 app.component('InputGroup', InputGroup);
 app.component('Dialog', Dialog);
 app.component('Textarea', Textarea);
+app.component('Knob', Knob);
 
 app.use(pinia).use(PrimeVue).use(router);
 

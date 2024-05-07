@@ -27,7 +27,7 @@ onMounted(() => {
 console.log(movie);
 
 function goBack() {
-    router.push({ name: 'Home' })
+    router.go(-1);
 }
 
 

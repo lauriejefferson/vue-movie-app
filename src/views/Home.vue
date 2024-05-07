@@ -45,22 +45,15 @@ const handleSort = (e) => {
   <div class="container mx-auto">
     <h1 class="title">Search Movies</h1>
     <div class="search">
-      <form @submit.prevent="handleSubmit()">
-        <InputGroup>
-          <InputText type="text" placeholder="Enter movie title" v-model="title" />
-          <Button type="submit" icon="pi pi-search" />
-        </InputGroup>
+      <form @submit.prevent="handleSubmit()" class="flex justify-content-center gap-3 p-3 border-round-sm"
+        style="backgroundColor: var(--primary-900); width: 50em;">
+        <InputText type="text" placeholder="Enter movie title" v-model="title" style="width: 20em;" />
+        <Dropdown v-model="selected" :options="movieType" optionLabel="name" placeholder='Movie type'
+          class="w-full md:w-14rem" @change="handleSelected" />
+        <Dropdown v-model="sorted" :options="sortBy" optionLabel="name" placeholder='Sort By' class="w-full md:w-14rem"
+          @change="handleSort" />
+        <Button type="submit" icon="pi pi-search" />
       </form>
-      <div class="filters">
-        <div class="card flex justify-content-center">
-          <Dropdown v-model="selected" :options="movieType" optionLabel="name" placeholder='Movie type'
-            class="w-full md:w-14rem" @change="handleSelected" />
-        </div>
-        <div class="card flex justify-content-center">
-          <Dropdown v-model="sorted" :options="sortBy" optionLabel="name" placeholder='Sort By'
-            class="w-full md:w-14rem" @change="handleSort" />
-        </div>
-      </div>
     </div>
     <div class="grid">
       <div v-show="isFiltered && !isSorted" v-for="(movie, index) in movieStore.filteredMovies" :key="index"

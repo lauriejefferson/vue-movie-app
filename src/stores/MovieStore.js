@@ -47,6 +47,15 @@ export const useMovieStore = defineStore('MovieStore', () => {
   //   });
   // }
 
+  function getAverageRating() {
+    currMovies.value = userRating.filter(
+      (rating) => rating.movieId === props.id
+    );
+    reducer = (acc, curr) => acc + parseInt(curr.rating);
+    totalRating = currMovies.value.reduce(reducer, initalValue);
+    value.value = Math.round(totalRating / currMovies.value.length);
+  }
+
   return {
     userRating,
     movieRating,
