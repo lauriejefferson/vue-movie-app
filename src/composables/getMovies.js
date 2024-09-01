@@ -11,7 +11,7 @@ const getMovies = () => {
     try {
       console.log(title);
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=${title}`
+        `https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`
       );
       movies.value = await response.json();
     } catch (err) {

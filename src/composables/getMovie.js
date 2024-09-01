@@ -8,7 +8,7 @@ const getMovie = () => {
   const load = async (id) => {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
+        `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
       );
       data.value = await response.json();
     } catch (err) {
