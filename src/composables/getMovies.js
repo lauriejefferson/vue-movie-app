@@ -17,7 +17,7 @@ const getMovies = () => {
     } catch (err) {
       error.value = err;
     }
-    console.log(movies.value);
+    // console.log(movies.value);
   };
 
   return { movies, error, loadMovies };
