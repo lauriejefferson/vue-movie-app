@@ -96,7 +96,6 @@ form input {
   width: 100%;
 }
 
-
 span {
   text-align: center;
 }
@@ -106,7 +105,7 @@ button {
   background-color: #0cc361;
   color: white;
   text-transform: uppercase;
-  padding: 10px 30px;
+  padding: 1em 2em;
   cursor: pointer;
 }
 

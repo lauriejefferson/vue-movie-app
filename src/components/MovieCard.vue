@@ -14,7 +14,7 @@ const props = defineProps({
 <template>
     <Card>
         <template #content>
-            <div class="flex gap-5">
+            <div class="flex gap-5 py-2">
                 <div>
                     <img alt="poster" :src="props.movie.Poster" height="200" width="150" />
                 </div>
@@ -30,7 +30,7 @@ const props = defineProps({
                     </div>
                     <div class="footer">
                         <router-link :to="{ name: 'Movie', params: { id: props.movie.imdbID } }">
-                            <Button icon="pi pi-check" label="Details" severity="success" />
+                            <Button icon="pi pi-check" label="Details" severity="success" class="flex px-3 py-2" />
                         </router-link>
                     </div>
                 </div>
