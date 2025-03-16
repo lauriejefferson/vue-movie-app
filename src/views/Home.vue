@@ -49,9 +49,10 @@ const handleSort = (e) => {
         style="backgroundColor: var(--primary-900); width: 50em;">
         <InputText type="text" placeholder="Enter movie title" v-model="title" style="width: 20em;" />
         <Dropdown v-model="selected" :options="movieType" optionLabel="name" placeholder='Movie type'
-          class="w-full md:w-14rem" @change="handleSelected" />
-        <Dropdown v-model="sorted" :options="sortBy" optionLabel="name" placeholder='Sort By' class="w-full md:w-14rem"
-          @change="handleSort" />
+          class="w-full md:w-14rem flex justify-content-center align-items-center text-center"
+          @change="handleSelected" />
+        <Dropdown v-model="sorted" :options="sortBy" optionLabel="name" placeholder='Sort By'
+          class="w-full md:w-14rem flex justify-content-center align-items-center text-center" @change="handleSort" />
         <Button type="submit" icon="pi pi-search" />
       </form>
     </div>
@@ -93,6 +94,11 @@ form input {
   border: 2px solid #C9C9CF;
   padding: 1em;
   width: 100%;
+}
+
+
+span {
+  text-align: center;
 }
 
 button {

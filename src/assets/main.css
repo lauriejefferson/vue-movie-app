@@ -57,7 +57,6 @@ li {
 
 body {
   font-family: 'Nunito Sans', sans-serif;
-  padding: 0;
   min-height: 100svh;
 }
 
@@ -82,14 +81,13 @@ a {
 
 .container {
   display: grid;
-  place-content: center;
-  /* min-height: 100svh; */
+  place-items: center;
 }
 
 .col {
   min-height: 70svh;
 }
 
-#app {
+/* #app {
   margin-inline: auto;
-}
+} */

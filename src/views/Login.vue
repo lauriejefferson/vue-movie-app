@@ -2,7 +2,7 @@
 
 </script>
 <template>
-    <div class="container col">
+    <div class="container">
         <h1>Welcome Back!</h1>
         <form action="#">
             <input type="email" placeholder="Enter your email">
