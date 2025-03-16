@@ -2,7 +2,7 @@
 
 </script>
 <template>
-    <div class="container">
+    <div class="container col">
         <h1>Welcome Back!</h1>
         <form action="#">
             <input type="email" placeholder="Enter your email">
@@ -12,8 +12,6 @@
         <p>Don't have an account? <router-link to="/signup">Sign up here.</router-link></p>
     </div>
 </template>
-
-
 
 <style scoped>
 h1 {

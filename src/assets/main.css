@@ -83,7 +83,11 @@ a {
 .container {
   display: grid;
   place-content: center;
-  min-height: 100svh;
+  /* min-height: 100svh; */
+}
+
+.col {
+  min-height: 70svh;
 }
 
 #app {
