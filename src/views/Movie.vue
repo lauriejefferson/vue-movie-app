@@ -2,7 +2,6 @@
 import { onMounted, onBeforeMount, ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import getMovie from '../composables/getMovie';
-
 import UserRating from '@/components/UserRating.vue'
 import AverageMovieRating from '@/components/AverageMovieRating.vue'
 import { useMovieStore } from '../stores/MovieStore';
@@ -39,28 +38,27 @@ const handleSubmit = () => {
 <template>
     <Button @click="goBack" label="Go Back" text />
     <div v-if="movie" class="container">
-        <h1 class="title">{{ movie.Title }}</h1>
         <div class="movie-container">
             <div class="movie-poster">
-                <img :src="movie.Poster" alt="poster" :style="{ 'height': '100%', 'width': '32%' }">
+                <img :src="movie.Poster" alt="poster" :style="{ 'height': 'auto', 'width': '400px' }">
             </div>
             <div class="movie-description">
                 <div class="plot">
-                    <h2>Plot</h2>
+                    <h1 class="title">{{ movie.Title }}</h1>
                     <p>{{ movie.Plot }}</p>
                 </div>
-                <div class="flex">
+                <div class="rated">
                     <h2>Rated: {{ movie.Rated }}</h2>
                 </div>
-                <div class="flex">
+                <div class="release">
                     <h2>Release Year:</h2>
                     <p>{{ movie.Year }}</p>
                 </div>
-                <div class="flex">
-                    <h2>Genre: </h2>
+                <div class="genre">
+                    <h2>Genre:</h2>
                     <p>{{ movie.Genre }}</p>
                 </div>
-                <div class="flex">
+                <div class="actors">
                     <h2>Actors: </h2>
                     <p>{{ movie.Actors }}</p>
                 </div>
@@ -76,32 +74,33 @@ const handleSubmit = () => {
                 <div class="avg-movie-rating">
                     <!-- <AverageMovieRating :id="props.id" /> -->
                 </div>
-            </div>
-
-            <div class="movie-ratings">
-                <Button label="Rate Movie" @click="visible = true" class="mt-3 px-3 py-2" />
-                <Dialog v-model:visible="visible" modal header="Rate Movie" :style="{ width: '25rem' }">
-                    <form action="#" @submit.prevent="handleSubmit" class="p-3">
-                        <div class="flex align-items-center gap-3 mb-3">
-                            <InputText type="text" name="username" id="username" v-model="username"
-                                placeholder="Enter username" class="px-3 py-2" />
-                        </div>
-                        <div class="flex align-items-center gap-3 mb-3">
-                            <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;" />
-                        </div>
-                        <div class="flex-align-items-center gap-3 mb-3">
-                            <Textarea v-model="comment" rows="5" cols="30" autoResize />
-                        </div>
-                        <div class="flex justify-content-start gap-2">
-                            <Button type="Submit" label="Add Rating" class="px-3 py-2" />
-                        </div>
-                    </form>
-                </Dialog>
-            </div>
-            <div class="show-rating" v-if="movieStore.rated">
-                <p class="not-rated">Movie already rated!</p>
+                <div class="movie-ratings">
+                    <Button label="Rate Movie" @click="visible = true" class="mt-3 px-3 py-2" />
+                    <Dialog v-model:visible="visible" modal header="Rate Movie" :style="{ width: '25rem' }">
+                        <form action="#" @submit.prevent="handleSubmit" class="p-3">
+                            <div class="flex align-items-center gap-3 mb-3">
+                                <InputText type="text" name="username" id="username" v-model="username"
+                                    placeholder="Enter username" class="px-3 py-2" />
+                            </div>
+                            <div class="flex align-items-center gap-3 mb-3">
+                                <Rating v-model="value" :cancel="false" style="color: #FFCA3A; margin-bottom: 1em;" />
+                            </div>
+                            <div class="flex-align-items-center gap-3 mb-3">
+                                <Textarea v-model="comment" rows="5" cols="30" autoResize />
+                            </div>
+                            <div class="flex justify-content-start gap-2">
+                                <Button type="Submit" label="Add Rating" class="px-3 py-2" />
+                            </div>
+                        </form>
+                    </Dialog>
+                </div>
             </div>
         </div>
+
+        <div class="show-rating" v-if="movieStore.rated">
+            <p class="not-rated">Movie already rated!</p>
+        </div>
+
     </div>
 
 </template>
@@ -117,9 +116,9 @@ const handleSubmit = () => {
 }
 
 
-.title {
+/* .title {
     text-align: center;
-}
+} */
 
 ul {
     padding: 0;
@@ -131,14 +130,9 @@ li {
 
 .movie-container {
     display: grid;
-    grid-template-columns: repeat(2, minmax(600px, 1fr));
-    grid-template-rows: auto;
-    place-content: center;
-}
-
-.plot {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    /* place-content: center; */
 }
 
 .ratings {
