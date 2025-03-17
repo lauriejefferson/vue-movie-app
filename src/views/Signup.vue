@@ -10,7 +10,7 @@ async function handleSubmit(values) {
 </script>
 
 <template>
-    <div class="container col">
+    <div class="container center">
         <h1>Sign Up</h1>
         <form action="#" @submit.prevent="handleSubmit">
             <input type="email" name="email" placeholder="Enter your email">

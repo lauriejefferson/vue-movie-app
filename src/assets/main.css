@@ -57,9 +57,7 @@ li {
 
 body {
   font-family: 'Nunito Sans', sans-serif;
-  min-height: 100svh;
 }
-
 
 h1 {
   font-size: 1.25rem;
@@ -81,13 +79,13 @@ a {
 
 .container {
   display: grid;
-  place-items: center;
+  place-content: center;
 }
 
-.col {
-  min-height: 70svh;
+.center {
+  min-height: 100svh;
 }
 
-/* #app {
+#app {
   margin-inline: auto;
-} */
+}
