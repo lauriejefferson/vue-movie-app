@@ -11,4 +11,4 @@ jobs:
         with:
           username: 'lauriejefferson'
           reponame: 'vue-movie-app'
-          token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+          token: ${{ secrets.VUE_MOVIE_APP_TOKEN }} # Leave this line unchanged
