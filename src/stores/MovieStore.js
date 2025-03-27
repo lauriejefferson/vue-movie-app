@@ -5,6 +5,7 @@ import { useLocalStorage } from '@vueuse/core';
 export const useMovieStore = defineStore('MovieStore', () => {
   const user = ref('');
   const rated = ref(false);
+  const filteredMovies = ref(null);
   const userRating = useLocalStorage('user-ratings', []);
   const movieRating = useLocalStorage('movie-ratings', []);
 
@@ -26,12 +27,13 @@ export const useMovieStore = defineStore('MovieStore', () => {
     }
     console.log(userRating.value);
   }
-  // function getFilteredMovies(selected) {
-  //   console.log(selected);
-  //   filteredMovies.value = [...movies.value.Search].filter(
-  //     (movie) => movie.Type === selected
-  //   );
-  // }
+
+  function getFilteredMovies(selected, filteredMovies) {
+    console.log(selected);
+    filteredMovies.value = [...movies.value.Search].filter(
+      (movie) => movie.Type === selected
+    );
+  }
 
   // function getSortedMovies(sorted) {
   //   console.log(sorted);
@@ -57,6 +59,7 @@ export const useMovieStore = defineStore('MovieStore', () => {
   }
 
   return {
+    getFilteredMovies,
     userRating,
     movieRating,
     addRating,

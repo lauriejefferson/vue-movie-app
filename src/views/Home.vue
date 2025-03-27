@@ -31,8 +31,8 @@ const handleSubmit = () => {
 
 const handleSelected = () => {
   isFiltered.value = true;
-  //  movieStore.getFilteredMovies(selected.value);
-  //  console.log(isFiltered)
+  movieStore.getFilteredMovies(selected.value);
+  console.log(isFiltered)
 }
 
 const handleSort = (e) => {
@@ -40,7 +40,12 @@ const handleSort = (e) => {
   // movieStore.getSortedMovies(sorted.value)
 };
 
+onMounted(() => {
+  title.value = "Terminator"
+  loadMovies(title.value)
+})
 </script>
+
 <template>
   <div class="container mx-auto">
     <h1 class="title">Search Movies</h1>
